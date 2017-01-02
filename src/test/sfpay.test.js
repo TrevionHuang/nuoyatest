@@ -5,7 +5,7 @@ import SFPay from '../sfpay';
 import { expect } from 'chai';
 
 describe('sfpay', () => {
-	describe('sPay', () => {
+	describe.skip('sPay', () => {
 		it('sPay should ok', async () => {
 			let mark = false;
 			const Param = {
@@ -21,6 +21,27 @@ describe('sfpay', () => {
 			};
 			const sfPay = new SFPay({key: 'xxxxxxxxxxxxxxxxxxxx', spId: 'xxxx', muchId: 'xxxxxxxxxxxxxxxxx'});
 			const qrPayRes = await sfPay.sPay({params: Param});
+			console.log(`The value of qrRes is ${JSON.stringify(qrPayRes)}`);
+			if (qrPayRes) mark = true;
+			expect(mark).to.equal(true);
+		});
+	});
+
+	describe('jPay', () => {
+		it('jPay should ok', async () => {
+			let mark = false;
+			const param = {
+				out_trade_no: `20161212${Math.random().toString().substr(2, 10)}`,
+				wx_appid: 'xxxxxxxxxxxxxxxx',
+				openid: 'xxxxxxxxxxxxxxxxxxxxx',
+				body: '测试jsAPI支付',
+				total_fee: 100,
+				mch_create_ip: '127.0.0.1',
+				notify_url: 'http://xxxxxxxxxxxxx/order/api/notify',
+				goods_tag: 'mj' // 例如：满减
+			};
+			const sfPay = new SFPay({key: 'xxxxxxxxxxxxxxxxxxxx', spId: 'xxxx', muchId: 'xxxxxxxxxxxxxxxxx'});
+			const qrPayRes = await sfPay.jPay({params: param});
 			console.log(`The value of qrRes is ${JSON.stringify(qrPayRes)}`);
 			if (qrPayRes) mark = true;
 			expect(mark).to.equal(true);

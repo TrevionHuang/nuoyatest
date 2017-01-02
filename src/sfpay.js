@@ -1,5 +1,5 @@
 import md5 from 'MD5';
-import {generateNonceString, mix, postReq} from './util';
+import { common } from './util';
 
 export default class SFPay {
 	constructor({key, spId, muchId}) {
@@ -20,18 +20,11 @@ export default class SFPay {
 
 	async sPay({params}) {
 		const url = '/gate/wx/spay';
-		return await SFPay.common({url, params, options: this.options});
+		return await common({url, params, options: this.options});
 	}
 
 	async jPay({params}) {
 		const url = '/gate/wx/jpay';
-		return await SFPay.common({url, params, options: this.options});
-	}
-
-	static async common({url, params, options}) {
-		params.nonce_str = params.nonce_str || generateNonceString({length: 32}); // eslint-disable-line
-		mix(params, options);
-		params.sign = SFPay.sign({params, partnerKey: options.partner_key}); // eslint-disable-line
-		return await postReq({url, params});
+		return await common({url, params, options: this.options});
 	}
 }
