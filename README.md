@@ -1,13 +1,13 @@
-# shangfu-pay
-上福支付 for node.js test版本
+# nysf-pay
+nysf-pay for node.js test版本
 
 ## Usage
 
 扫码支付
 ```js
-var SFPay = require('shangfu-pay');
+import SFPay from 'shangfu-pay';
 
-var sfpay = SFPay({
+const sfpay = SFPay({
 	appid: 'xxxxxxxx',
 	mch_id: 'xxxxxxxxxx',
 	partner_key: 'xxxxxxxxxxxxxxxxx', // 商户平台API密钥
