@@ -93,4 +93,25 @@ describe('sfpay', () => {
 			expect(result).to.equal(true);
 		});
 	});
+
+	describe('mpay', () => {
+		it('mpay should ok', async () => {
+			let result = false;
+			const Param = {
+				out_trade_no: `20170103${Math.random().toString().substr(2, 10)}`,
+				body: '测试扫码支付',
+				total_fee: 1,
+				mch_create_ip: '127.0.0.1',
+				auth_code: 'xxxxxx', // 扫码支付授权码， 设备读取用户展示的条码或者二维码信息
+				time_start: '20170103104500', // yyyyMMddhhmmss
+				time_expire: '20170103160000', // yyyyMMddhhmmss
+				goods_tag: 'coupon'
+			};
+			const sfPay = new SFPay({key: 'xxxxxxxxxxxxxxxxxxxx', spId: 'xxxx', muchId: 'xxxxxxxxxxxxxxxxx'});
+			const mpayRes = await sfPay.mpay({params: Param});
+			console.log(`The value of mpayRes is ${JSON.stringify(mpayRes)}`);
+			if (mpayRes) result = true;
+			expect(result).to.equal(true);
+		});
+	});
 });

@@ -42,4 +42,9 @@ export default class SFPay {
 		const url = '/gate/spsvr/trade/rfdq';
 		return await common({url, params, options: this.options});
 	}
+
+	async mpay({params}) {
+		const url = '/gate/wx/mpay';
+		return await common({url, params, options: this.options});
+	}
 }
