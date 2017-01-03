@@ -19,8 +19,7 @@ describe('sfpay', () => {
 				goods_tag: 'mj',
 				product_id: 'qr1001'
 			};
-			// const sfPay = new SFPay({key: 'xxxxxxxxxxxxxxxxxxxx', spId: 'xxxx', muchId: 'xxxxxxxxxxxxxxxxx'});
-			const sfPay = new SFPay({key: '406847FBFCA442B8AA5157DADA73453D', spId: '1029', muchId: '102950000000002'});
+			const sfPay = new SFPay({key: 'xxxxxxxxxxxxxxxxxxxx', spId: 'xxxx', muchId: 'xxxxxxxxxxxxxxxxx'});
 			const qrPayRes = await sfPay.sPay({params: Param});
 			console.log(`The value of qrRes is ${JSON.stringify(qrPayRes)}`);
 			if (qrPayRes) mark = true;
