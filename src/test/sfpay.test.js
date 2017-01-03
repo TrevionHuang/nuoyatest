@@ -7,7 +7,7 @@ import { expect } from 'chai';
 describe('sfpay', () => {
 	describe('sPay', () => {
 		it('sPay should ok', async () => {
-			let mark = false;
+			let result = false;
 			const Param = {
 				out_trade_no: `20170103${Math.random().toString().substr(2, 10)}`,
 				body: '测试扫码支付',
@@ -21,15 +21,15 @@ describe('sfpay', () => {
 			};
 			const sfPay = new SFPay({key: 'xxxxxxxxxxxxxxxxxxxx', spId: 'xxxx', muchId: 'xxxxxxxxxxxxxxxxx'});
 			const qrPayRes = await sfPay.sPay({params: Param});
-			console.log(`The value of qrRes is ${JSON.stringify(qrPayRes)}`);
-			if (qrPayRes) mark = true;
-			expect(mark).to.equal(true);
+			console.log(`The value of qrPayRes is ${JSON.stringify(qrPayRes)}`);
+			if (qrPayRes) result = true;
+			expect(result).to.equal(true);
 		});
 	});
 
 	describe.skip('jPay', () => {
 		it('jPay should ok', async () => {
-			let mark = false;
+			let result = false;
 			const param = {
 				out_trade_no: `20170103${Math.random().toString().substr(2, 10)}`,
 				wx_appid: 'xxxxxxxxxxxxxxxx',
@@ -42,23 +42,41 @@ describe('sfpay', () => {
 			};
 			const sfPay = new SFPay({key: 'xxxxxxxxxxxxxxxxxxxx', spId: 'xxxx', muchId: 'xxxxxxxxxxxxxxxxx'});
 			const jPayRes = await sfPay.jPay({params: param});
-			console.log(`The value of qrRes is ${JSON.stringify(jPayRes)}`);
-			if (jPayRes) mark = true;
-			expect(mark).to.equal(true);
+			console.log(`The value of jPayRes is ${JSON.stringify(jPayRes)}`);
+			if (jPayRes) result = true;
+			expect(result).to.equal(true);
 		});
 	});
 
 	describe('tradeQry', () => {
 		it('tradeQry should ok', async () => {
-			let mark = false;
+			let result = false;
 			const Param = {
 				out_trade_no: 'xxxxxxxxxxxxxxxxxxxx'
 			};
 			const sfPay = new SFPay({key: 'xxxxxxxxxxxxxxxxxxxx', spId: 'xxxx', muchId: 'xxxxxxxxxxxxxxxxx'});
 			const tradeQryRes = await sfPay.tradeQry({params: Param});
-			console.log(`The value of qrRes is ${JSON.stringify(tradeQryRes)}`);
-			if (tradeQryRes) mark = true;
-			expect(mark).to.equal(true);
+			console.log(`The value of tradeQryRes is ${JSON.stringify(tradeQryRes)}`);
+			if (tradeQryRes) result = true;
+			expect(result).to.equal(true);
+		});
+	});
+
+	describe('rfd', () => {
+		it('rfd should ok', async () => {
+			let result = false;
+			const Param = {
+				out_trade_no: 'xxxxxxxxxxxxxxxxxxxx', // 商户订单号
+				out_refund_no: 'xxxxxxxxxxxxxxxxxxxx', // 商户退款单号，32 个字符内
+				total_fee: 100, // 订单总金额，单位为分
+				refund_fee: 100, // 退款总金额,单位为分,可以做部分退款
+				refund_channel: 'BALANCE' // ORIGINAL-原路退款，默认BALANCE-余额
+			};
+			const sfPay = new SFPay({key: 'xxxxxxxxxxxxxxxxxxxx', spId: 'xxxx', muchId: 'xxxxxxxxxxxxxxxxx'});
+			const rfdRes = await sfPay.rfd({params: Param});
+			console.log(`The value of rfdRes is ${JSON.stringify(rfdRes)}`);
+			if (rfdRes) result = true;
+			expect(result).to.equal(true);
 		});
 	});
 });
