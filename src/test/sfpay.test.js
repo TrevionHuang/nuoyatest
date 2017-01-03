@@ -79,4 +79,18 @@ describe('sfpay', () => {
 			expect(result).to.equal(true);
 		});
 	});
+
+	describe('rfdq', () => {
+		it('rfdq should ok', async () => {
+			let result = false;
+			const Param = {
+				out_trade_no: 'xxxxxxxxxxxxxxxxxxxx'
+			};
+			const sfPay = new SFPay({key: 'xxxxxxxxxxxxxxxxxxxx', spId: 'xxxx', muchId: 'xxxxxxxxxxxxxxxxx'});
+			const rfdqRes = await sfPay.rfdq({params: Param});
+			console.log(`The value of rfdqRes is ${JSON.stringify(rfdqRes)}`);
+			if (rfdqRes) result = true;
+			expect(result).to.equal(true);
+		});
+	});
 });
