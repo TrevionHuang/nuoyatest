@@ -31,7 +31,7 @@ describe('sfpay', () => {
 		it('jPay should ok', async () => {
 			let mark = false;
 			const param = {
-				out_trade_no: `20161212${Math.random().toString().substr(2, 10)}`,
+				out_trade_no: `20170103${Math.random().toString().substr(2, 10)}`,
 				wx_appid: 'xxxxxxxxxxxxxxxx',
 				openid: 'xxxxxxxxxxxxxxxxxxxxx',
 				body: '测试jsAPI支付',
@@ -41,9 +41,23 @@ describe('sfpay', () => {
 				goods_tag: 'mj' // 例如：满减
 			};
 			const sfPay = new SFPay({key: 'xxxxxxxxxxxxxxxxxxxx', spId: 'xxxx', muchId: 'xxxxxxxxxxxxxxxxx'});
-			const qrPayRes = await sfPay.jPay({params: param});
-			console.log(`The value of qrRes is ${JSON.stringify(qrPayRes)}`);
-			if (qrPayRes) mark = true;
+			const jPayRes = await sfPay.jPay({params: param});
+			console.log(`The value of qrRes is ${JSON.stringify(jPayRes)}`);
+			if (jPayRes) mark = true;
+			expect(mark).to.equal(true);
+		});
+	});
+
+	describe('tradeQry', () => {
+		it('tradeQry should ok', async () => {
+			let mark = false;
+			const Param = {
+				out_trade_no: 'xxxxxxxxxxxxxxxxxxxx'
+			};
+			const sfPay = new SFPay({key: 'xxxxxxxxxxxxxxxxxxxx', spId: 'xxxx', muchId: 'xxxxxxxxxxxxxxxxx'});
+			const tradeQryRes = await sfPay.tradeQry({params: Param});
+			console.log(`The value of qrRes is ${JSON.stringify(tradeQryRes)}`);
+			if (tradeQryRes) mark = true;
 			expect(mark).to.equal(true);
 		});
 	});

@@ -27,4 +27,9 @@ export default class SFPay {
 		const url = '/gate/wx/jpay';
 		return await common({url, params, options: this.options});
 	}
+
+	async tradeQry({params}) {
+		const url = '/gate/spsvr/trade/qry';
+		return await common({url, params, options: this.options});
+	}
 }
