@@ -5,21 +5,22 @@ import SFPay from '../sfpay';
 import { expect } from 'chai';
 
 describe('sfpay', () => {
-	describe.skip('sPay', () => {
+	describe('sPay', () => {
 		it('sPay should ok', async () => {
 			let mark = false;
 			const Param = {
-				out_trade_no: `20170101${Math.random().toString().substr(2, 10)}`,
+				out_trade_no: `20170103${Math.random().toString().substr(2, 10)}`,
 				body: '测试扫码支付',
 				total_fee: 1,
 				mch_create_ip: '127.0.0.1',
-				notify_url: 'http://xxxxxxxx/order/api/notify',
-				time_start: 20170101072500, // (new Date()).Format('yyyyMMddhhmmss'),
-				time_expire: 20170101083000, // myDate.Format('yyyyMMddhhmmss'),
+				notify_url: 'http://wx.nuoyadalu.com/order/api/notify',
+				time_start: '20170103104500', // yyyyMMddhhmmss
+				time_expire: '20170103160000', // yyyyMMddhhmmss
 				goods_tag: 'mj',
 				product_id: 'qr1001'
 			};
-			const sfPay = new SFPay({key: 'xxxxxxxxxxxxxxxxxxxx', spId: 'xxxx', muchId: 'xxxxxxxxxxxxxxxxx'});
+			// const sfPay = new SFPay({key: 'xxxxxxxxxxxxxxxxxxxx', spId: 'xxxx', muchId: 'xxxxxxxxxxxxxxxxx'});
+			const sfPay = new SFPay({key: '406847FBFCA442B8AA5157DADA73453D', spId: '1029', muchId: '102950000000002'});
 			const qrPayRes = await sfPay.sPay({params: Param});
 			console.log(`The value of qrRes is ${JSON.stringify(qrPayRes)}`);
 			if (qrPayRes) mark = true;
@@ -27,7 +28,7 @@ describe('sfpay', () => {
 		});
 	});
 
-	describe('jPay', () => {
+	describe.skip('jPay', () => {
 		it('jPay should ok', async () => {
 			let mark = false;
 			const param = {

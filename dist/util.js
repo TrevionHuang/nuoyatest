@@ -3,29 +3,29 @@
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-exports.postReq = exports.reqTool = undefined;
+exports.common = exports.postReq = exports.reqTool = undefined;
 
 let reqTool = exports.reqTool = function () {
-	var _ref2 = _asyncToGenerator(function* (_ref3) {
-		let options = _ref3.options;
+	var _ref = _asyncToGenerator(function* (_ref2) {
+		let options = _ref2.options;
 
 		let result = null;
 		try {
 			yield new Promise(function (resolve, reject) {
 				(0, _request2.default)(options, function (err, response, body) {
-					if (!err) resolve(body);else reject(err);
+					!err ? resolve(body) : reject(err); // eslint-disable-line
 				});
 			}).then(function (docs) {
 				result = docs;
 			});
 		} catch (e) {
-			console.log(`ERROR:${ result }`);
+			console.log(`ERROR:${ e }`);
 		}
 		return result;
 	});
 
 	return function reqTool(_x) {
-		return _ref2.apply(this, arguments);
+		return _ref.apply(this, arguments);
 	};
 }();
 
@@ -50,6 +50,23 @@ let postReq = exports.postReq = function () {
 	};
 }();
 
+let common = exports.common = function () {
+	var _ref6 = _asyncToGenerator(function* (_ref7) {
+		let url = _ref7.url,
+		    params = _ref7.params,
+		    options = _ref7.options;
+
+		params.nonce_str = params.nonce_str || generateNonceString({ length: 32 }); // eslint-disable-line
+		mix(params, options);
+		params.sign = _sfpay2.default.sign({ params, partnerKey: options.partner_key }); // eslint-disable-line
+		return yield postReq({ url, params });
+	});
+
+	return function common(_x3) {
+		return _ref6.apply(this, arguments);
+	};
+}();
+
 exports.generateNonceString = generateNonceString;
 exports.mix = mix;
 
@@ -57,12 +74,16 @@ var _request = require('request');
 
 var _request2 = _interopRequireDefault(_request);
 
+var _sfpay = require('./sfpay');
+
+var _sfpay2 = _interopRequireDefault(_sfpay);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
-function generateNonceString(_ref) {
-	let length = _ref.length;
+function generateNonceString(_ref3) {
+	let length = _ref3.length;
 
 	const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 	const maxPos = chars.length;

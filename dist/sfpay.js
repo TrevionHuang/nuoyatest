@@ -20,7 +20,7 @@ class SFPay {
 		    spId = _ref.spId,
 		    muchId = _ref.muchId;
 
-		this.options = { sp_id: spId, much_id: muchId, partner_key: key };
+		this.options = { sp_id: spId, mch_id: muchId, partner_key: key };
 	}
 
 	static sign(_ref2) {
@@ -33,7 +33,6 @@ class SFPay {
 			return `${ key }=${ params[key] }`;
 		}).join('&');
 		queryString = `${ queryString }&key=${ partnerKey }`;
-		console.log(`queryString 的值为： ${ JSON.stringify(queryString) }`);
 		return (0, _MD2.default)(queryString).toUpperCase();
 	}
 
@@ -43,8 +42,7 @@ class SFPay {
 		let params = _ref3.params;
 		return _asyncToGenerator(function* () {
 			const url = '/gate/wx/spay';
-			console.log(`options的值为：${ JSON.stringify(_this.options) } params的值为：${ JSON.stringify(params) }`);
-			return yield SFPay.common({ url, params, options: _this.options });
+			return yield (0, _util.common)({ url, params, options: _this.options });
 		})();
 	}
 
@@ -54,20 +52,7 @@ class SFPay {
 		let params = _ref4.params;
 		return _asyncToGenerator(function* () {
 			const url = '/gate/wx/jpay';
-			console.log(`options的值为：${ JSON.stringify(_this2.options) } params的值为：${ JSON.stringify(params) }`);
-			return yield SFPay.common({ url, params, options: _this2.options });
-		})();
-	}
-
-	static common(_ref5) {
-		let url = _ref5.url,
-		    params = _ref5.params,
-		    options = _ref5.options;
-		return _asyncToGenerator(function* () {
-			params.nonce_str = params.nonce_str || (0, _util.generateNonceString)({ length: 32 }); // eslint-disable-line
-			(0, _util.mix)(params, options);
-			params.sign = SFPay.sign({ params, partnerKey: options.partner_key }); // eslint-disable-line
-			return yield (0, _util.postReq)({ url, params });
+			return yield (0, _util.common)({ url, params, options: _this2.options });
 		})();
 	}
 }

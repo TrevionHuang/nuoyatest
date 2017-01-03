@@ -18,19 +18,41 @@ describe('sfpay', function () {
 		it('sPay should ok', _asyncToGenerator(function* () {
 			let mark = false;
 			const Param = {
-				out_trade_no: `20170101${ Math.random().toString().substr(2, 10) }`,
+				out_trade_no: `20170103${ Math.random().toString().substr(2, 10) }`,
 				body: '测试扫码支付',
 				total_fee: 1,
 				mch_create_ip: '127.0.0.1',
 				notify_url: 'http://wx.nuoyadalu.com/order/api/notify',
-				time_start: 20170101072500, // (new Date()).Format('yyyyMMddhhmmss'),
-				time_expire: 20170101083000, // myDate.Format('yyyyMMddhhmmss'),
+				time_start: '20170103104500', // yyyyMMddhhmmss
+				time_expire: '20170103160000', // yyyyMMddhhmmss
 				goods_tag: 'mj',
 				product_id: 'qr1001'
 			};
+			// const sfPay = new SFPay({key: 'xxxxxxxxxxxxxxxxxxxx', spId: 'xxxx', muchId: 'xxxxxxxxxxxxxxxxx'});
 			const sfPay = new _sfpay2.default({ key: '406847FBFCA442B8AA5157DADA73453D', spId: '1029', muchId: '102950000000002' });
 			const qrPayRes = yield sfPay.sPay({ params: Param });
-			console.log(`qrPayRes the value of ${ JSON.stringify(qrPayRes) }`);
+			console.log(`The value of qrRes is ${ JSON.stringify(qrPayRes) }`);
+			if (qrPayRes) mark = true;
+			(0, _chai.expect)(mark).to.equal(true);
+		}));
+	});
+
+	describe.skip('jPay', function () {
+		it('jPay should ok', _asyncToGenerator(function* () {
+			let mark = false;
+			const param = {
+				out_trade_no: `20161212${ Math.random().toString().substr(2, 10) }`,
+				wx_appid: 'xxxxxxxxxxxxxxxx',
+				openid: 'xxxxxxxxxxxxxxxxxxxxx',
+				body: '测试jsAPI支付',
+				total_fee: 100,
+				mch_create_ip: '127.0.0.1',
+				notify_url: 'http://xxxxxxxxxxxxx/order/api/notify',
+				goods_tag: 'mj' // 例如：满减
+			};
+			const sfPay = new _sfpay2.default({ key: 'xxxxxxxxxxxxxxxxxxxx', spId: 'xxxx', muchId: 'xxxxxxxxxxxxxxxxx' });
+			const qrPayRes = yield sfPay.jPay({ params: param });
+			console.log(`The value of qrRes is ${ JSON.stringify(qrPayRes) }`);
 			if (qrPayRes) mark = true;
 			(0, _chai.expect)(mark).to.equal(true);
 		}));

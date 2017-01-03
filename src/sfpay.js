@@ -3,7 +3,7 @@ import { common } from './util';
 
 export default class SFPay {
 	constructor({key, spId, muchId}) {
-		this.options = {sp_id: spId, much_id: muchId, partner_key: key};
+		this.options = {sp_id: spId, mch_id: muchId, partner_key: key};
 	}
 
 	static sign({params, partnerKey}) {
