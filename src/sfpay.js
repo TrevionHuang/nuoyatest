@@ -18,22 +18,22 @@ export default class SFPay {
 		return md5(queryString).toUpperCase();
 	}
 
-	async sPay({params}) {
+	async sPay(params) {
 		const url = '/gate/wx/spay';
 		return await common({url, params, options: this.options});
 	}
 
-	async jPay({params}) {
+	async jPay(params) {
 		const url = '/gate/wx/jpay';
 		return await common({url, params, options: this.options});
 	}
 
-	async tradeQry({params}) {
+	async tradeQry(params) {
 		const url = '/gate/spsvr/trade/qry';
 		return await common({url, params, options: this.options});
 	}
 
-	async rfd({params}) {
+	async rfd(params) {
 		const url = '/gate/wx/rfd';
 		return await common({url, params, options: this.options});
 	}
@@ -43,7 +43,7 @@ export default class SFPay {
 		return await common({url, params, options: this.options});
 	}
 
-	async mpay({params}) {
+	async mpay(params) {
 		const url = '/gate/wx/mpay';
 		return await common({url, params, options: this.options});
 	}

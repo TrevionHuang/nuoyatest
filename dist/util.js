@@ -34,7 +34,7 @@ let postReq = exports.postReq = function () {
 		let url = _ref5.url,
 		    params = _ref5.params;
 
-		console.log(`params的值为：${ JSON.stringify(params) }`);
+		console.log(`The value of params is ${ JSON.stringify(params) }`);
 		const options = {
 			headers: { 'content-type': 'application/x-www-form-urlencoded; charset=UTF-8' },
 			url: `http://api.shangfudata.com${ url }`,

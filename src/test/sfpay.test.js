@@ -5,10 +5,10 @@ import SFPay from '../sfpay';
 import { expect } from 'chai';
 
 describe('sfpay', () => {
-	describe('sPay', () => {
+	describe.skip('sPay', () => {
 		it('sPay should ok', async () => {
 			let result = false;
-			const Param = {
+			const params = {
 				out_trade_no: `20170103${Math.random().toString().substr(2, 10)}`,
 				body: '测试扫码支付',
 				total_fee: 1,
@@ -20,7 +20,7 @@ describe('sfpay', () => {
 				product_id: 'qr1001'
 			};
 			const sfPay = new SFPay({key: 'xxxxxxxxxxxxxxxxxxxx', spId: 'xxxx', muchId: 'xxxxxxxxxxxxxxxxx'});
-			const qrPayRes = await sfPay.sPay({params: Param});
+			const qrPayRes = await sfPay.sPay(params);
 			console.log(`The value of qrPayRes is ${JSON.stringify(qrPayRes)}`);
 			if (qrPayRes) result = true;
 			expect(result).to.equal(true);
@@ -30,7 +30,7 @@ describe('sfpay', () => {
 	describe.skip('jPay', () => {
 		it('jPay should ok', async () => {
 			let result = false;
-			const param = {
+			const params = {
 				out_trade_no: `20170103${Math.random().toString().substr(2, 10)}`,
 				wx_appid: 'xxxxxxxxxxxxxxxx',
 				openid: 'xxxxxxxxxxxxxxxxxxxxx',
@@ -41,31 +41,31 @@ describe('sfpay', () => {
 				goods_tag: 'mj' // 例如：满减
 			};
 			const sfPay = new SFPay({key: 'xxxxxxxxxxxxxxxxxxxx', spId: 'xxxx', muchId: 'xxxxxxxxxxxxxxxxx'});
-			const jPayRes = await sfPay.jPay({params: param});
+			const jPayRes = await sfPay.jPay(params);
 			console.log(`The value of jPayRes is ${JSON.stringify(jPayRes)}`);
 			if (jPayRes) result = true;
 			expect(result).to.equal(true);
 		});
 	});
 
-	describe('tradeQry', () => {
+	describe.skip('tradeQry', () => {
 		it('tradeQry should ok', async () => {
 			let result = false;
-			const Param = {
+			const params = {
 				out_trade_no: 'xxxxxxxxxxxxxxxxxxxx'
 			};
 			const sfPay = new SFPay({key: 'xxxxxxxxxxxxxxxxxxxx', spId: 'xxxx', muchId: 'xxxxxxxxxxxxxxxxx'});
-			const tradeQryRes = await sfPay.tradeQry({params: Param});
+			const tradeQryRes = await sfPay.tradeQry(params);
 			console.log(`The value of tradeQryRes is ${JSON.stringify(tradeQryRes)}`);
 			if (tradeQryRes) result = true;
 			expect(result).to.equal(true);
 		});
 	});
 
-	describe('rfd', () => {
+	describe.skip('rfd', () => {
 		it('rfd should ok', async () => {
 			let result = false;
-			const Param = {
+			const params = {
 				out_trade_no: 'xxxxxxxxxxxxxxxxxxxx', // 商户订单号
 				out_refund_no: 'xxxxxxxxxxxxxxxxxxxx', // 商户退款单号，32 个字符内
 				total_fee: 100, // 订单总金额，单位为分
@@ -73,31 +73,31 @@ describe('sfpay', () => {
 				refund_channel: 'BALANCE' // ORIGINAL-原路退款，默认BALANCE-余额
 			};
 			const sfPay = new SFPay({key: 'xxxxxxxxxxxxxxxxxxxx', spId: 'xxxx', muchId: 'xxxxxxxxxxxxxxxxx'});
-			const rfdRes = await sfPay.rfd({params: Param});
+			const rfdRes = await sfPay.rfd(params);
 			console.log(`The value of rfdRes is ${JSON.stringify(rfdRes)}`);
 			if (rfdRes) result = true;
 			expect(result).to.equal(true);
 		});
 	});
 
-	describe('rfdq', () => {
+	describe.skip('rfdq', () => {
 		it('rfdq should ok', async () => {
 			let result = false;
-			const Param = {
+			const params = {
 				out_trade_no: 'xxxxxxxxxxxxxxxxxxxx'
 			};
 			const sfPay = new SFPay({key: 'xxxxxxxxxxxxxxxxxxxx', spId: 'xxxx', muchId: 'xxxxxxxxxxxxxxxxx'});
-			const rfdqRes = await sfPay.rfdq({params: Param});
+			const rfdqRes = await sfPay.rfdq(params);
 			console.log(`The value of rfdqRes is ${JSON.stringify(rfdqRes)}`);
 			if (rfdqRes) result = true;
 			expect(result).to.equal(true);
 		});
 	});
 
-	describe('mpay', () => {
+	describe.skip('mpay', () => {
 		it('mpay should ok', async () => {
 			let result = false;
-			const Param = {
+			const params = {
 				out_trade_no: `20170103${Math.random().toString().substr(2, 10)}`,
 				body: '测试扫码支付',
 				total_fee: 1,
@@ -108,7 +108,7 @@ describe('sfpay', () => {
 				goods_tag: 'coupon'
 			};
 			const sfPay = new SFPay({key: 'xxxxxxxxxxxxxxxxxxxx', spId: 'xxxx', muchId: 'xxxxxxxxxxxxxxxxx'});
-			const mpayRes = await sfPay.mpay({params: Param});
+			const mpayRes = await sfPay.mpay(params);
 			console.log(`The value of mpayRes is ${JSON.stringify(mpayRes)}`);
 			if (mpayRes) result = true;
 			expect(result).to.equal(true);
